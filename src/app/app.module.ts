@@ -8,7 +8,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { FormComponent } from './components/clientes/form.component';
+import { FormComponent } from './components/form/form.component';
 
 
 @NgModule({

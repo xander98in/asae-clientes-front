@@ -18,7 +18,7 @@ export class ClientesComponent {
     {id: 3, nombre: 'Pedro', apellido: 'Cortez', email: 'juan@unicauca.edu.co', createAt: '2021-05-14'},
   ];
  */
-  clientes: Cliente[] = []; 
+  clientes: Cliente[] = [];
 
   constructor(
     private clienteService: ClienteService,
@@ -29,7 +29,7 @@ export class ClientesComponent {
 
   ngOnInit(): void {
     this.cargarClientes();
-   
+
   }
 
   private cargarClientes() {
@@ -38,17 +38,38 @@ export class ClientesComponent {
         this.clientes = clientes;
       })
   }
-  
+
   crearCliente() {
     this.router.navigate(['/clientes/form'])
   }
 
-  eliminar(id: number) {
-    this.clienteService.eliminar(id)
-      .subscribe( resp => {
-        Swal.fire('Cliente Eliminado', `${resp.mensaje}`, 'success');
-        this.cargarClientes();
-        
-      })
+  actualizar(id: number) {
+    this.router.navigate([`/clientes/form/${id}`]);
+  }
+
+  eliminar(id: number, nombre: string) {
+      Swal.fire({
+        title: '¿Está seguro?',
+        text: `¿Está seguro que desea eliminar al cliente ${nombre}?`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: 'Si, eliminar!',
+        cancelButtonText: 'No, cancelar',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.clienteService.eliminar(id)
+            .subscribe( resp => {
+              Swal.fire({
+                title: 'Eliminado!',
+                text: `${resp.mensaje}`,
+                icon: "success"
+              });
+              this.cargarClientes();
+            })
+        }
+      });
+
   }
 }

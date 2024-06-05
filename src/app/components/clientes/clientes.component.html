@@ -20,6 +20,7 @@
                     <th>Apellido</th>
                     <th>email</th>
                     <th>Fecha de creación</th>
+                    <th>Actualizar</th>
                     <th>Eliminar</th>
                 </tr>
             </thead>
@@ -30,8 +31,9 @@
                 <td>{{ cliente.apellido }}</td>
                 <td>{{ cliente.email }}</td>
                 <td>{{ cliente.createAt }}</td>
-                <td><a class="btn btn-danger" (click)='eliminar(cliente.id)'>Eliminar</a></td>
-              </tr> 
+                <td><a class="btn btn-primary" (click)="actualizar(cliente.id)">Editar</a></td>
+                <td><a class="btn btn-danger" (click)='eliminar(cliente.id, cliente.nombre)'>Eliminar</a></td>
+              </tr>
             </tbody>
           </table>
     </div>
